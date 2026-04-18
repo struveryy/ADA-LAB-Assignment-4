@@ -1,0 +1,31 @@
+import matplotlib.pyplot as plt
+import time
+
+def test_performance():
+    sizes = [100, 500, 1000, 2000]
+    naive_times = []
+    kmp_times = []
+    
+    for size in sizes:
+        text = "A" * size + "B"
+        pattern = "AB"
+        
+        start = time.time()
+        naive_search(text, pattern)
+        naive_times.append(time.time() - start)
+        
+        start = time.time()
+        kmp_search(text, pattern)
+        kmp_times.append(time.time() - start)
+    
+    plt.plot(sizes, naive_times, label="Naive")
+    plt.plot(sizes, kmp_times, label="KMP")
+    plt.xlabel("Text Size")
+    plt.ylabel("Time")
+    plt.title("String Matching Comparison")
+    plt.legend()
+    plt.show()
+
+test_performance()
+
+

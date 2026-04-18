@@ -1,0 +1,29 @@
+Use cost = number of conflicts
+Code (Python)
+best_solution = None
+best_cost = float('inf')
+
+def branch_and_bound(schedule, flights, index, cost):
+    global best_solution, best_cost
+    
+    if cost >= best_cost:
+        return
+    
+    if index == len(flights):
+        best_solution = schedule.copy()
+        best_cost = cost
+        return
+    
+    flight = flights[index]
+    
+    for crew in crew_members:
+        new_cost = cost
+        if not is_valid(schedule, crew, flight):
+            new_cost += 1
+        
+        schedule.setdefault(crew, []).append(flight)
+        branch_and_bound(schedule, flights, index+1, new_cost)
+        schedule[crew].pop()
+
+branch_and_bound({}, flights, 0, 0)
+print(best_solution)

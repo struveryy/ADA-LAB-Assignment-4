@@ -1,0 +1,13 @@
+# Backtracking is slow because it explores all possibilities (O(2^n))
+
+# Branch and Bound improves performance by pruning bad solutions early
+
+# String Matching:
+# Naive → Simple but inefficient
+# KMP → Uses LPS array to skip comparisons
+
+# NP-Hard Problems:
+# No efficient solution for large inputs
+
+# Heuristics:
+# Greedy, Genetic Algorithm, AI search can improve performance

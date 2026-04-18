@@ -1,0 +1,28 @@
+Code (Recursive Backtracking) (Python)
+flights = [('F1', 9, 11), ('F2', 10, 12), ('F3', 11, 13)]
+crew_members = ['C1', 'C2']
+
+def is_valid(schedule, crew, flight):
+    start, end = flight[1], flight[2]
+    for f in schedule.get(crew, []):
+        if not (end <= f[1] or start >= f[2]):  # overlap check
+            return False
+    return True
+
+def backtrack(schedule, flights, index):
+    if index == len(flights):
+        return schedule
+    
+    flight = flights[index]
+    for crew in crew_members:
+        if is_valid(schedule, crew, flight):
+            schedule.setdefault(crew, []).append(flight)
+            result = backtrack(schedule, flights, index + 1)
+            if result:
+                return result
+            schedule[crew].pop()
+    
+    return None
+
+result = backtrack({}, flights, 0)
+print(result)
